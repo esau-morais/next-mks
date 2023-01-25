@@ -26,7 +26,7 @@ const ShoppingBagIcon = () => {
         opacity="0.737"
       />
     </svg>
-  )
-}
+  );
+};
 
-export default ShoppingBagIcon
+export default ShoppingBagIcon;

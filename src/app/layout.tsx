@@ -8,6 +8,7 @@ import { Footer, TopMenu, Main } from "@/components";
 import StyledComponentsRegistry from "@/lib/registry";
 import store from "@/store/store";
 import { GlobalStyle } from "@/styles/globals";
+
 const MontserratFont = Montserrat({
   subsets: ["latin"],
 });
@@ -17,16 +18,17 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="en" className={MontserratFont.className}>
       <head />
       <body>
-        <Provider store={store}>
-          <TopMenu />
+        <StyledComponentsRegistry>
+          <Provider store={store}>
+            <GlobalStyle />
 
-          <GlobalStyle />
-          <StyledComponentsRegistry>
+            <TopMenu />
+
             <Main>{children}</Main>
-          </StyledComponentsRegistry>
-        </Provider>
 
-        <Footer />
+            <Footer />
+          </Provider>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );
