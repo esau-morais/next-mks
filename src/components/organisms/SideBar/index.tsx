@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useMemo } from "react";
 
 import Image from "next/image";
 
@@ -9,6 +9,7 @@ import {
   removeFromBasket,
   RootState,
 } from "@/store/store";
+import { calculateTotalPrice } from "@/utils/store";
 
 import { Aside, BasketItem } from "./styles";
 
@@ -22,10 +23,7 @@ const SideBar = ({
   const { basket } = useAppSelector((state: RootState) => state.basket);
   const dispatch = useAppDispatch();
 
-  const total = basket.reduce(
-    (amount, item) => item.price * item.quantity + amount,
-    0
-  );
+  const total = useMemo(() => calculateTotalPrice(basket), [basket]);
 
   return (
     <Aside open={isOpen}>
@@ -65,7 +63,7 @@ const SideBar = ({
                 </button>
               </div>
 
-              <span className="product__amount">
+              <span className="product__amount" data-testid="amount">
                 R${product.price * product.quantity}
               </span>
             </div>
